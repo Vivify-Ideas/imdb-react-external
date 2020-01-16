@@ -1,5 +1,7 @@
 import axios from 'axios';
 import config from '../config';
+import store from '../store/Store';
+import { showErrorModal } from '../store/actions/ErrorActions';
 
 class HttpService {
   constructor(options = {}) {
@@ -21,11 +23,18 @@ class HttpService {
   }
 
   handleErrorResponse(error) {
-    const { status } = error.response;
-
+    const { status, data } = error.response;
     switch (status) {
       case 401: {
         this.unauthorizedCallback();
+        break;
+      }
+      case 400: {
+        store.dispatch(showErrorModal({ message: data, status }));
+        break;
+      }
+      case 500: {
+        store.dispatch(showErrorModal({ message: data, status }));
         break;
       }
       default:
