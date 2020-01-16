@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import MovieList from '../component/MovieList';
 
-class Home extends Component {
-  render() {
-    return (
-      <div>
-        <p>Welcome to Pocket IMDb</p>
-      </div>
-    );
-  }
+export default function Home() {
+  return (
+    <div>
+      <MovieList />
+    </div>
+  );
 }
-
-export default Home;
